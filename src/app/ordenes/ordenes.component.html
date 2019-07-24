@@ -1,0 +1,68 @@
+<div class="row">
+        <div class="col-md-12">
+            <h2>Ordenes de pago</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Año</label>
+                <select class="form-control" [(ngModel)]="params.year" (ngModelChange)="searchOrdersByPeriod()">  
+                        <option *ngFor="let y of years">{{y.year}} </option>  
+                    </select> 
+            </div>
+             
+        </div>
+        <div class="col-md-1">
+                <div class="form-group">
+                    <label>Mes</label>
+                    <select class="form-control" [(ngModel)]="params.month" (ngModelChange)="searchOrdersByPeriod()">  
+                            <option *ngFor="let m of months">{{m.id}} </option>  
+                        </select> 
+                </div>
+                 
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Buscar orden de pago:</label>
+                <input [(ngModel)]="buscarPor" class="form-control" /> 
+            </div>
+        </div>
+        <div class="col-md-1" style="padding-top: 30px;">
+            <button class="btn btn-primary" (click)="searchOrdersByOrderId()">Buscar</button>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Buscar en cualquier campo:</label>
+                <input [(ngModel)]="buscarTexto" class="form-control" /> 
+            </div>
+        </div>
+        <div class="col-md-2" style="padding-top: 30px;">
+            <button class="btn btn-primary" (click)="busquedaInteligente(buscarTexto)">Buscar</button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Cliente</td>
+                    <td>Razón social</td>
+                    <td>Fecha</td>
+                    <td>Pedido</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of listaOrdenes">                    
+                    <td>{{order.id}}</td>
+                    <td *ngIf="order.Cliente !== null">{{ order.Cliente.nombreCompleto }}</td>
+                    <td *ngIf="order.Cliente !== null">{{ order.Cliente.razonSocial }}</td>
+                    <td>{{order.fechaCrea}}</td>
+                    <td>{{order.pedido}}</td>
+                    <td>{{order.total}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
